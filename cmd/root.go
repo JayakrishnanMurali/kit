@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/jayakrishnanMurali/kit/pkg/commands"
 	"github.com/spf13/cobra"
 )
 
@@ -13,6 +14,27 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Welcome to Kit!!\n Use 'kit --help' to see available commands.")
 	},
+}
+
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Print the version number of Kit",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Kit v0.1")
+	},
+}
+
+var initCmd = &cobra.Command{
+	Use:   "init",
+	Short: "Create an empty Git repository or reinitialize an existing one",
+	Run: func(cmd *cobra.Command, args []string) {
+		commands.InitCmd(args)
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(initCmd)
 }
 
 func Execute() {
